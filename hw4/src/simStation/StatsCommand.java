@@ -3,9 +3,11 @@ package simStation;
 import mvc.*;
 
 /*
- * Edit History (Keven Lam)
+ * Edit History 
+ * 3/27 - Created (Alvin)
+ *
+ * 4/5 - modified the stats display(Keven)
  * 
- * 4/5 - Created StatsCommand.
  */
 
 public class StatsCommand extends Command {
@@ -18,6 +20,7 @@ public class StatsCommand extends Command {
 	public void execute() {
 		Simulation sim = (Simulation)model;
 		String[] stats = sim.getStats();
-		Utilities.inform(stats);;
+		Utilities.inform(stats);
 	}
+
 }

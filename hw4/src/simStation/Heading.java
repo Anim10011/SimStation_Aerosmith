@@ -1,23 +1,33 @@
 package simStation;
 
-import mvc.Utilities;
+import java.io.Serializable;
+
+import mvc.*;
 
 /*
- * Edit History (Keven Lam)
+ * Edit History 
+ * 3/27 - Created (Keven)
+ *
+ *
  * 
- * 4/5 - Created Heading. Added nextHeading().
  */
 
-public enum Heading {
-	N, S, E, W;
+public enum Heading implements Serializable {
+	NORTH, EAST, SOUTH, WEST;
 	
-	public static Heading nextHeading() {
-		int tmp = Utilities.rng.nextInt(4);
+	public static Heading randHeading() {
 		
-		if (tmp == 0) return N;
-		if (tmp == 1) return S;
-		if (tmp == 2) return E;
-		if (tmp == 3) return W;
+		switch(Utilities.rng.nextInt(4)) {
+		case 0:
+			return NORTH;
+		case 1:
+			return EAST;
+		case 2:
+			return SOUTH;
+		case 3:
+			return WEST;
+		}
+		
 		return null;
 	}
 }

@@ -6,12 +6,6 @@ import java.util.*;
 
 import mvc.*;
 
-/*
- * Edit History (Keven Lam)
- * 
- * 4/11 - Created PrisonersDilemma.
- */
-
 public class PrisonersDilemma extends Simulation {
 	
 	public static int NEIGHBOR_RADIUS = 10;
@@ -59,18 +53,15 @@ public class PrisonersDilemma extends Simulation {
 	
 	@Override
 	public String[] getStats() {
-		int clock = super.getClock();
 		String[] simStats = super.getStats();
 		
 		stats[0] = simStats[0];
 		stats[1] = simStats[1];
 		
-		//if (clock % 100 == 0 && clock != 0) {
-			stats[3] = "Always Cooperate: "+ this.getAverageFitness(new AlwaysCooperate(null));
-			stats[4] = "Always Cheat: " + this.getAverageFitness(new AlwaysCheat(null));
-			stats[5] = "Randomly Cooperate: " + this.getAverageFitness(new Chaos(null));
-			stats[6] = "Tit for Tat: " + this.getAverageFitness(new TitForTat(null));
-		//}
+		stats[3] = "Always Cooperate: "+ String.format("%.2f", this.getAverageFitness(new AlwaysCooperate(null)));
+		stats[4] = "Always Cheat: " + String.format("%.2f", this.getAverageFitness(new AlwaysCheat(null)));
+		stats[5] = "Randomly Cooperate: " + String.format("%.2f",this.getAverageFitness(new Chaos(null)));
+		stats[6] = "Tit for Tat: " + String.format("%.2f", this.getAverageFitness(new TitForTat(null)));
 		return stats;
 	}
 	

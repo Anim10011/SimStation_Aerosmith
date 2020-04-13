@@ -1,82 +1,102 @@
 package simStation;
 
+import java.awt.Color;
 import java.util.*;
-
 import mvc.*;
 
 /*
- * Edit History (Keven Lam)
+ * Edit History 
+ * 3/27 - Created (Min-yuan)
  * 
- * 4/5 - Created Simulation.
+ * 4/1  - changed from array to arraylist for agents (Alex)
  * 
- * 4/8 - Added getNeighbor().
+ * 4/3  - added getNeighbors implementation (Alex)
  * 
- * 4/11 - Added constants, WORLD_SIZE, AGENT_SIZE, NUM_AGENTS
- * 
- * 4/11 - Added getClock().
+ * 4/4  - forgot changed() flags, added (Alex)
+ *
+ * 4/5 - added getNeighbor (Keven)
+ *
  */
+
 public class Simulation extends Model {
 
-	public static int WORLD_SIZE = 250;
-	public static int AGENT_SIZE = 5;
-	public static int NUM_AGENTS = 50;
-
-	private Timer timer;
-	private int clock;
-	private List<Agent> agents;
-
+	public static final int WORLD_SIZE = 250;
+	public static final int NUM_AGENTS = 100;
+	public static final int SIZE = 4;
+	public static final Color AGENT_COLOR = Color.RED;
+	
+	protected ArrayList<Agent> agents;
+	protected int clock = 0;
+	protected Timer timer;
+	
 	public Simulation() {
 		agents = new ArrayList<>();
-		clock = 0;
-		timer = null;
 	}
+	
 
+	public ArrayList<Agent> getNeighbors(Agent current, int radius) {
+		ArrayList<Agent> neighbors = new ArrayList<>();
+
+		for (Agent a : agents) {
+			if (Math.hypot(current.getLocation().x - a.getLocation().x, current.getLocation().y - a.getLocation().y) <= radius) {
+				neighbors.add(a);
+			}
+		}
+		
+		neighbors.remove(current);
+		
+		return neighbors;
+	}
+	
+	public Agent getNeighbor(Agent current, int radius) {
+		for (Agent a : agents) {
+			if (Math.hypot(current.getLocation().x - a.getLocation().x, current.getLocation().y - a.getLocation().y) <= radius) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
+	public ArrayList<Agent> getAgents() {
+		return agents;
+	}
+	
+	public int getClock() {
+		return clock;
+	}
+	
 	public void start() {
+		startTimer();
 		populate();
 		for (Agent a : agents) {
-			a.start();
+			Thread thread = new Thread(a);
+			thread.start();
 		}
-		startTimer();
-		changed();
+//		changed();
 	}
-
-	public void resume() {
-		for (Agent a : agents) {
-			a.resume();
-		}
-	}
-
+	
 	public void suspend() {
 		for (Agent a : agents) {
 			a.suspend();
 		}
+//		changed();
 	}
-
+	
+	public void resume() {
+		for (Agent a : agents) {
+			a.resume();
+		}
+//		changed();
+	}
+	
 	public void stop() {
 		for (Agent a : agents) {
 			a.stop();
 		}
-		if (timer != null) {
-			stopTimer();
-		}
+		stopTimer();
+//		changed();
 	}
 	
-	public Agent getNeighbor(Agent target, int radius) {
-		Agent neighbor = null;
-		
-		for (Agent a : agents) {
-			if (((a.getX() * a.getX()) + (a.getY() * a.getY()) <= radius * radius)
-					&& a != target) {
-				// a^2 + b^2 = c^2 Kind of a weird way to get the distance between
-				// the two, but should work.
-				neighbor = a;
-			}
-		}
-		return neighbor;
-	}
-
-	public void populate() {}
-
 	public String[] getStats() {
 		String[] stats = new String[2];
 		stats[0] = "#agents = " + agents.size();
@@ -84,28 +104,23 @@ public class Simulation extends Model {
 		return stats;
 	}
 
-	public List<Agent> getAgents() {
-		return agents;
-	}
+	
+	public void populate() { /* override me  */ }
 
 	private void startTimer() {
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new ClockUpdater(), 1000, 1000);
-	}
+    }
 
-	private void stopTimer() {
-		timer.cancel();
-		timer.purge();
-	}
+    private void stopTimer() {
+    	timer.cancel();
+	  	timer.purge();
+    }
 
-	private class ClockUpdater extends TimerTask {
-		public void run() {
-			clock++;
-			//changed();
-		}
-	}
-	
-	public int getClock() {
-		return clock;
-	}
+ 	private class ClockUpdater extends TimerTask {
+ 		public void run() {
+ 			clock++;
+ 			//changed();
+      	}
+ 	}
 }

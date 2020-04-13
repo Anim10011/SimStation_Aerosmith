@@ -1,107 +1,123 @@
 package simStation;
 
 import java.io.*;
+import java.awt.*;
+import java.util.*;
 
-import mvc.Utilities;
+import mvc.*;
 
 /*
- * Edit History (Keven Lam)
+ * Edit History 
+ * 3/27 - Created (Alex)
+ *
+ * 4/1 - add move method (Keven)
+ *
+ * 4/1  - added helper methods adjustPos() and between() (Alex)
  * 
- * 4/5 - Created Agent class.
+ * 4/8  - added reference to world (Alex)
+ *
+ *
  * 
- * 4/5 - Added start(), run(), resume(), suspend(), stop(), move()
- * 
- * 4/11 - Modified run() to not be synchronized
- * 
- * 4/11 - Added getters for all fields
  */
 
 public abstract class Agent implements Runnable, Serializable {
-	private String name;
-	private Heading direction;
-	private int xc;
-	private int yc;
-	private AgentState state;
-	private Simulation world;
 	
-	public Agent(String name, Simulation world) {
+	protected Simulation world;
+	
+	protected AgentState state;
+	protected Thread thread;
+	
+	protected String name;
+	protected Heading heading;
+	protected Point location;
+	protected Color color;
+
+	public Agent(String name, Simulation sim) {
 		this.name = name;
-		this.world = world;
-		direction = null;
-		xc = Utilities.rng.nextInt(Simulation.WORLD_SIZE);
-		yc = Utilities.rng.nextInt(Simulation.WORLD_SIZE);
-		state = AgentState.READY;
+		this.state = AgentState.READY;
+		this.heading = Heading.randHeading();	
+		this.location = new Point(Utilities.rng.nextInt(Simulation.WORLD_SIZE), Utilities.rng.nextInt(Simulation.WORLD_SIZE));
+		this.world = sim;
+		this.color = Simulation.AGENT_COLOR;
 	}
 	
-	public void start() {
-		Thread thread = new Thread(this);
-		thread.start();
-	}
-	
-	public void run() {
-		while (!isStopped()) {
-			state = AgentState.RUNNING;
-			update();
-			try {
-				Thread.sleep(100);
-				synchronized(this) {
-					while(isSuspended()) {
-						wait();
-					}
-				}
+	public void adjustPos() {
+		while (!(between(location.x, 0, Simulation.WORLD_SIZE) && between(location.y, 0, Simulation.WORLD_SIZE))) {
+			if (location.x > Simulation.WORLD_SIZE) {
+				location.x -= Simulation.WORLD_SIZE;
+			} else if (location.x < 0) {
+				location.x += Simulation.WORLD_SIZE;
 			}
-			catch (Exception e) {
-				System.out.println(e);
+			if (location.y > Simulation.WORLD_SIZE) {
+				location.y -= Simulation.WORLD_SIZE;
+			} else if (location.y < 0) {
+				location.y += Simulation.WORLD_SIZE;
 			}
 		}
+	}
+	
+	public boolean between(int n, int lowInc, int highInc) { return (n >= lowInc && n <= highInc); }
+	public Color getColor() { return color; }
+	public Heading getHeading() { return heading; }
+	public Point getLocation() { return location; }
+	public Simulation getWorld() { return world; }
+	public String getName() { return name; }
+	
+	public synchronized void setDirection(Heading newHeading) {
+		this.heading = newHeading;
+	}
+	public synchronized AgentState getState() { return state; }
+	public synchronized String toString() { return name + ".state = " + state; }
+	public synchronized void stop() { state = AgentState.STOPPED; }
+	public synchronized boolean isStopped() { return state == AgentState.STOPPED; }
+	public synchronized void suspend() { state = AgentState.SUSPENDED; }
+	public synchronized boolean isSuspended() { return state == AgentState.SUSPENDED;  }
+	
+	public synchronized void join() throws InterruptedException {
+		if (thread != null) thread.join();
+	}
+	
+	public synchronized void move() { /* override me  */ }
+	
+	public synchronized void move(int steps) {
+		if (heading == Heading.NORTH) {
+			location.y -= steps;
+		}
+		else if (heading == Heading.SOUTH) {
+			location.y += steps;
+		}
+		else if (heading == Heading.EAST) {
+			location.x += steps;
+		}
+		else if (heading == Heading.WEST) {
+			location.x -= steps;
+		}
+		adjustPos();
+		world.changed();
 	}
 	
 	public synchronized void resume() {
 		if (!isStopped()) {
-			state = AgentState.RUNNING;
 			notify();
+			state = AgentState.RUNNING;
 		}
 	}
-	
-	public synchronized void move(int steps) {
-		if (direction == Heading.N) {
-			yc -= steps;
-			if (yc < 0) yc += Simulation.WORLD_SIZE;
+
+	public void run() {
+		thread = Thread.currentThread(); // catch my thread
+		while(!isStopped()) {
+			state = AgentState.RUNNING;
+			update();
+			try {
+				Thread.sleep(100); // be cooperative
+				synchronized(this) {
+					while(isSuspended()) { wait(); }
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		}
-		else if (direction == Heading.S) {
-			yc += steps;
-			if (yc >= Simulation.WORLD_SIZE) yc -= Simulation.WORLD_SIZE;
-		}
-		else if (direction == Heading.E) {
-			xc += steps;
-			if (xc >= Simulation.WORLD_SIZE) xc -= Simulation.WORLD_SIZE;
-		}
-		else if (direction == Heading.W) {
-			xc -= steps;
-			if (xc < 0) xc += Simulation.WORLD_SIZE;
-		}
-		world.changed();
 	}
-	
+
 	public abstract void update();
-	
-	public synchronized void stop() { state = AgentState.STOPPED; }
-	
-	public synchronized boolean isStopped() { return state == AgentState.STOPPED; }
-	
-	public synchronized void suspend() { state = AgentState.SUSPENDED; }
-	
-	public synchronized boolean isSuspended() { return state == AgentState.SUSPENDED; }
-	
-	public int getX() { return xc; }
-	
-	public int getY() { return yc; }
-	
-	public Heading getDirection() { return direction; }
-	
-	public Simulation getWorld() { return world; }
-	
-	public String getName() { return name; }
-	
-	public synchronized void setDirection(Heading newDirection) { direction = newDirection; }
 }

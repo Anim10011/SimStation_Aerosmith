@@ -3,11 +3,6 @@ package prisoner;
 import simStation.*;
 import mvc.*;
 
-/*
- * Edit History (Keven Lam)
- * 
- * 4/11 - Created Prisoner.
- */
 public class Prisoner extends Agent {
 	
 	private int fitness;
@@ -83,9 +78,7 @@ public class Prisoner extends Agent {
 				neighbor.setPreviousCoOpStatus(false);
 			}
 		}
-		super.setDirection(Heading.nextHeading());
+		super.setDirection(Heading.randHeading());
 		super.move(Utilities.rng.nextInt(PrisonersDilemma.MOVE_SPEED));
-		
-		//System.out.println(super.getName() + " - " + fitness);
 	}
 }

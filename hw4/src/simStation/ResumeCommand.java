@@ -3,9 +3,9 @@ package simStation;
 import mvc.*;
 
 /*
- * Edit History (Keven Lam)
+ * Edit History 
+ * 3/27 - Created (Alvin)
  * 
- * 4/5 - Created ResumeCommand.
  */
 
 public class ResumeCommand extends Command {
@@ -16,7 +16,8 @@ public class ResumeCommand extends Command {
 
 	@Override
 	public void execute() {
-		Simulation sim = (Simulation)model;
+		Simulation sim = (Simulation) model;
 		sim.resume();
 	}
+
 }

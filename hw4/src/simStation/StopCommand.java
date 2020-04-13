@@ -3,9 +3,9 @@ package simStation;
 import mvc.*;
 
 /*
- * Edit History (Keven Lam)
+ * Edit History 
+ * 3/27 - Created (Alvin)
  * 
- * 4/5 - Created StopCommand.
  */
 
 public class StopCommand extends Command {
@@ -16,7 +16,8 @@ public class StopCommand extends Command {
 
 	@Override
 	public void execute() {
-		Simulation sim = (Simulation)model;
+		Simulation sim = (Simulation) model;
 		sim.stop();
 	}
+
 }

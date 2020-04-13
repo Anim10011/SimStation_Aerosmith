@@ -1,14 +1,13 @@
 package simStation;
 
+import java.io.Serializable;
+
 /*
- * Edit History (Keven Lam)
+ * Edit History 
+ * 3/27 - Created (Keven)
  * 
- * 4/5 - Created Agent State. Added types.
  */
 
-public enum AgentState {
-	READY,
-	RUNNING,
-	SUSPENDED,
-	STOPPED;
+public enum AgentState implements Serializable {
+	READY, RUNNING, SUSPENDED, STOPPED;
 }
