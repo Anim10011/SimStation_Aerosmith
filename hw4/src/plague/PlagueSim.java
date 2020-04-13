@@ -6,7 +6,7 @@ import java.util.*;
 import mvc.Utilities;
 
 /*
- * Edit History 
+ * Edit History (Alex)
  * 4/1  - Created
  * 
  * 4/10 - updated getNeighbors()

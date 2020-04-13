@@ -2,6 +2,15 @@ package randomWalk;
 
 import simStation.*;
 
+/*
+ * Edit History (Min-yuan)
+ * 
+ * 4/12 - Created
+ * 
+ * 4/12 - Modified to use NUM_AGENTS in populate()
+ * 
+ */
+
 public class RandomWalk extends Simulation {
 	
 	public static int SPEED = 10;

@@ -6,6 +6,17 @@ import java.util.*;
 
 import mvc.*;
 
+/*
+ * Edit History (Keven)
+ * 
+ * 4/11 - Created
+ * 
+ * 4/11 - Modified populate() to create prisoners and then passed in a strategy
+ * 
+ * 4/12 - Modified getStats to format averages nicely
+ * 
+ */
+
 public class PrisonersDilemma extends Simulation {
 	
 	public static int NEIGHBOR_RADIUS = 10;

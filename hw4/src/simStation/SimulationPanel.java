@@ -12,6 +12,7 @@ import randomWalk.*;
  * Edit History 
  * 3/27 - Created (Alex)
  * 
+ * 4/11 - Added all customizations to main() (Keven)
  */
 
 public class SimulationPanel extends AppPanel {

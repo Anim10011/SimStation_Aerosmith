@@ -2,6 +2,15 @@ package prisoner;
 
 import mvc.Utilities;
 
+/*
+ * Edit History (Keven)
+ * 
+ * 4/11 - Created
+ * 
+ * 4/11 - Added reference to Prisoner and modified constructor accordingly
+ * 
+ */
+
 public abstract class PrisonersDilemmaStrat {
 	protected Prisoner prisoner;
 	
