@@ -3,6 +3,17 @@ package prisoner;
 import simStation.*;
 import mvc.*;
 
+/*
+ * Edit History (Keven)
+ * 
+ * 4/11 - Created
+ * 
+ * 4/11 - Added previousCoOpStatus
+ * 
+ * 4/11 - Added getters and setter for fields
+ * 
+ */
+
 public class Prisoner extends Agent {
 	
 	private int fitness;

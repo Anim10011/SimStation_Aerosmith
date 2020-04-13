@@ -2,6 +2,19 @@ package flocking;
 
 import simStation.*;
 
+/*
+ * Edit History (Alvin)
+ * 
+ * 4/8 - Created
+ * 
+ * 4/11 - Modified super() to accept to Simulation
+ * 
+ * 4/11 - Modified xc and yc to work with Point
+ * 
+ * 4/11 - Added NEIGHBOR_RADIUS
+ * 
+ */
+
 public class Bird extends Agent {
     private Heading heading;
     private int speed;

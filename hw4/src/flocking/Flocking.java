@@ -6,6 +6,15 @@ import simStation.*;
 
 import java.util.Random;
 
+/*
+ * Edit History (Alvin)
+ * 
+ * 4/8 - Created
+ * 
+ * 4/11 - Modified randoms to use classes in package
+ * 
+ */
+
 public class Flocking extends Simulation {
     @Override
     public void populate() {

@@ -4,9 +4,11 @@ import mvc.*;
 
 /*
  * Edit History 
- * 3/27 - Created
+ * 3/27 - Created (Keven)
  * 
- * 4/8  - altered to accomomdate SimFactory Interface
+ * 4/8  - altered to accommodate SimFactory Interface
+ * 
+ * 4/11 - altered to remove SimFactory Interface
  * 
  */
 
@@ -16,15 +18,6 @@ public class SimulationFactory implements AppFactory {
 
 	@Override
 	public Model makeModel() { return new Simulation(); }
-
-//	@Override
-//	//public View getView(Model m) {
-//	//	return new SimulationView((Simulation) m);
-//	//}
-//
-//	public View makeView(Model model) {
-//		return new SimulationView(model);
-//	}
 
 	@Override
 	public String[] getEditCommands() {
