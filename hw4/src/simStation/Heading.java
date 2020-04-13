@@ -2,6 +2,12 @@ package simStation;
 
 import mvc.Utilities;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/5 - Created Heading. Added nextHeading().
+ */
+
 public enum Heading {
 	N, S, E, W;
 	

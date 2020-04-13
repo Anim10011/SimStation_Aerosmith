@@ -2,6 +2,12 @@ package simStation;
 
 import mvc.*;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/5 - Created StatsCommand.
+ */
+
 public class StatsCommand extends Command {
 
 	public StatsCommand(Model model) {

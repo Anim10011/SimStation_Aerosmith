@@ -2,6 +2,21 @@ package prisoner;
 
 import mvc.Utilities;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/11 - Created PrisonersDilemmaStrat.
+ * 
+ * 4/11 - Created AlwaysCooperate class.
+ * 
+ * 4/11 - Created AlwaysCheat class.
+ * 
+ * 4/11 - Created Chaos class.
+ * 
+ * 4/11 - Created TitForTat class.
+ * 
+ */
+
 public abstract class PrisonersDilemmaStrat {
 	protected Prisoner prisoner;
 	

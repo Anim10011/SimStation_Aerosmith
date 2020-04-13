@@ -2,6 +2,14 @@ package simStation;
 
 import mvc.*;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/5 - Created SimStationFactory.
+ * 
+ * 4/5 - Added makeView().
+ */
+
 public class SimStationFactory implements AppFactory {
 
 	@Override

@@ -7,6 +7,14 @@ import javax.swing.*;
 import mvc.*;
 import prisoner.*;
 
+/*
+ * Edit History
+ * 
+ * 4/5 - Created SimStationPanel.
+ * 
+ * 4/11 - Added main() to test Prisoner's Dilemma Simulation.
+ */
+
 public class SimStationPanel extends AppPanel {
 	
 	public SimStationPanel(AppFactory factory) {

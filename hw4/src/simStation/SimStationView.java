@@ -6,6 +6,12 @@ import java.awt.Graphics;
 import mvc.*;
 import java.util.*;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/5 - Created SimStationView.
+ */
+
 public class SimStationView extends View {
 
 	public SimStationView(Model model) {

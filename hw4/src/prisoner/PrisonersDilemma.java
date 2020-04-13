@@ -6,6 +6,12 @@ import java.util.*;
 
 import mvc.*;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/11 - Created PrisonersDilemma.
+ */
+
 public class PrisonersDilemma extends Simulation {
 	
 	public static int NEIGHBOR_RADIUS = 10;

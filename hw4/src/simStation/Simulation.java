@@ -4,6 +4,17 @@ import java.util.*;
 
 import mvc.*;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/5 - Created Simulation.
+ * 
+ * 4/8 - Added getNeighbor().
+ * 
+ * 4/11 - Added constants, WORLD_SIZE, AGENT_SIZE, NUM_AGENTS
+ * 
+ * 4/11 - Added getClock().
+ */
 public class Simulation extends Model {
 
 	public static int WORLD_SIZE = 250;

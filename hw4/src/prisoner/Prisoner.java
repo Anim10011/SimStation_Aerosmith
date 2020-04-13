@@ -3,6 +3,11 @@ package prisoner;
 import simStation.*;
 import mvc.*;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/11 - Created Prisoner.
+ */
 public class Prisoner extends Agent {
 	
 	private int fitness;

@@ -4,6 +4,18 @@ import java.io.*;
 
 import mvc.Utilities;
 
+/*
+ * Edit History (Keven Lam)
+ * 
+ * 4/5 - Created Agent class.
+ * 
+ * 4/5 - Added start(), run(), resume(), suspend(), stop(), move()
+ * 
+ * 4/11 - Modified run() to not be synchronized
+ * 
+ * 4/11 - Added getters for all fields
+ */
+
 public abstract class Agent implements Runnable, Serializable {
 	private String name;
 	private Heading direction;
