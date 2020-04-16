@@ -25,11 +25,6 @@ public class PlagueAgent extends Agent {
 		this.infected = false;
 	}
 	
-	public PlagueAgent(Agent a) {
-		super(a.getName(), a.getWorld());
-		this.infected = false;
-	}
-	
 	public PlagueAgent(String name, PlagueSim sim, boolean inf) {
 		super(name, sim);
 		plagueWorld = sim;

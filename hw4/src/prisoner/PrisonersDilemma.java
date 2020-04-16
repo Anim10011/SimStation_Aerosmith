@@ -15,6 +15,8 @@ import mvc.*;
  * 
  * 4/12 - Modified getStats to format averages nicely
  * 
+ * 4/15 - Moved the driver function into here (Keven)
+ * 
  */
 
 public class PrisonersDilemma extends Simulation {
@@ -87,5 +89,10 @@ public class PrisonersDilemma extends Simulation {
 			}
 		}
 		return total / count;
+	}
+	
+	public static void main(String[] args) {
+		AppPanel panel = new SimulationPanel(new PrisonersDilemmaFactory());
+		panel.display();
 	}
 }

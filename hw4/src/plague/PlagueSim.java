@@ -3,7 +3,7 @@ package plague;
 import simStation.*;
 import java.util.*;
 
-import mvc.Utilities;
+import mvc.*;
 
 /*
  * Edit History (Alex)
@@ -11,6 +11,8 @@ import mvc.Utilities;
  * 
  * 4/10 - updated getNeighbors()
  * 		- fixed percentage display in stats
+ * 
+ * 4/15 - Moved driver function into here (Keven)
  */
 
 public class PlagueSim extends Simulation {
@@ -77,6 +79,11 @@ public class PlagueSim extends Simulation {
 		plagueStats[2] = "%infected = " + String.format("%.2f", calcInfected());
 		
 		return plagueStats;
+	}
+	
+	public static void main(String[] args) {
+		AppPanel panel = new SimulationPanel(new PlagueFactory());
+		panel.display();
 	}
 
 }

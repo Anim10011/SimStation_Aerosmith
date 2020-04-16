@@ -15,6 +15,8 @@ import mvc.*;
  * 4/4  - forgot changed() flags, added (Alex)
  *
  * 4/5 - added getNeighbor (Keven)
+ * 
+ * 4/15 - Updated Timer in suspend, resume (Keven)
  *
  */
 
@@ -66,27 +68,26 @@ public class Simulation extends Model {
 	}
 	
 	public void start() {
-		startTimer();
 		populate();
 		for (Agent a : agents) {
 			Thread thread = new Thread(a);
 			thread.start();
 		}
-//		changed();
+		startTimer();
 	}
 	
 	public void suspend() {
 		for (Agent a : agents) {
 			a.suspend();
 		}
-//		changed();
+		stopTimer();
 	}
 	
 	public void resume() {
 		for (Agent a : agents) {
 			a.resume();
 		}
-//		changed();
+		startTimer();
 	}
 	
 	public void stop() {
@@ -94,7 +95,6 @@ public class Simulation extends Model {
 			a.stop();
 		}
 		stopTimer();
-//		changed();
 	}
 	
 	public String[] getStats() {
