@@ -13,6 +13,8 @@ import randomWalk.*;
  * 3/27 - Created (Alex)
  * 
  * 4/11 - Added all customizations to main() (Keven)
+ * 
+ * 4/15 - Removed main function and moved into customizations (Keven)
  */
 
 public class SimulationPanel extends AppPanel {
@@ -70,26 +72,4 @@ public class SimulationPanel extends AppPanel {
 			add(buttonPanel, "West");
 			add(view, "East");
 		}
-		
-		public static void main(String[] args) {
-			
-			// Plague
-//			AppPanel panel = new SimulationPanel(new PlagueFactory());
-//			panel.display();
-			
-			// Flocking
-//			AppPanel panel = new SimulationPanel(new FlockingFactory());
-//			panel.display();
-			
-			// Prisoner's Dilemma
-//			AppPanel panel = new SimulationPanel(new PrisonersDilemmaFactory());
-//			panel.display();
-			
-			
-			// Random Walks
-			AppPanel panel = new SimulationPanel(new RandomWalkFactory());
-			panel.display();
-
-		}
-
 	}

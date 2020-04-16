@@ -1,10 +1,7 @@
 package flocking;
 
-import mvc.AppFactory;
-import mvc.Utilities;
+import mvc.*;
 import simStation.*;
-
-import java.util.Random;
 
 /*
  * Edit History (Alvin)
@@ -12,6 +9,8 @@ import java.util.Random;
  * 4/8 - Created
  * 
  * 4/11 - Modified randoms to use classes in package
+ * 
+ * 4/15 - Moved driver function into here (Keven)
  * 
  */
 
@@ -32,5 +31,10 @@ public class Flocking extends Simulation {
             agents.add(newAgent);
         }
         changed();
+    }
+    
+    public static void main(String[] args) {
+		AppPanel panel = new SimulationPanel(new FlockingFactory());
+		panel.display();
     }
 }
